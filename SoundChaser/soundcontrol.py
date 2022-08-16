@@ -1,4 +1,8 @@
+from curses.ascii import SO
 from datetime import datetime
+from sound import *
+from time import *
+import schedule
 
 def DayTimeChecker():
     dt = datetime.now()
@@ -13,4 +17,10 @@ def DayTimeChecker():
 
     return (current_day in weekdays and current_hour in hours_for_weekdays) or (current_day in weekends and current_hour in hours_for_weekends)
 
-print(DayTimeChecker())
+def SoundChaser():
+    if DayTimeChecker() == True:
+        Sound.volume_max()
+    else:
+        Sound.volume_min()
+
+schedule.every(30).minutes.do(SoundChaser)
