@@ -1,7 +1,6 @@
-from curses.ascii import SO
 from datetime import datetime
 from sound import *
-from time import *
+import time
 import schedule
 
 def DayTimeChecker():
@@ -20,7 +19,13 @@ def DayTimeChecker():
 def SoundChaser():
     if DayTimeChecker() == True:
         Sound.volume_max()
+        print('Volume set to max')
     else:
         Sound.volume_min()
+        print('Volume set to min')
 
-schedule.every(30).minutes.do(SoundChaser)
+schedule.every(10).seconds.do(SoundChaser)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
