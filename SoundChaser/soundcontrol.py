@@ -1,7 +1,7 @@
 from datetime import datetime
 from sound import *
 import time
-import schedule
+from random import randint
 
 def DayTimeChecker():
     dt = datetime.now()
@@ -18,14 +18,13 @@ def DayTimeChecker():
 
 def SoundChaser():
     if DayTimeChecker() == True:
-        Sound.volume_max()
-        print('Volume set to max')
+        rand_volume = randint(90, 100)
+        Sound.volume_set(rand_volume)
+        print(f'Volume set to {rand_volume}')
     else:
         Sound.volume_min()
         print('Volume set to min')
 
-schedule.every(10).seconds.do(SoundChaser)
-
 while True:
-    schedule.run_pending()
-    time.sleep(1)
+    SoundChaser()
+    time.sleep(10)
