@@ -1,7 +1,7 @@
 from datetime import datetime
 from sound import *
 import time
-from random import randint
+
 
 def DayTimeChecker():
     dt = datetime.now()
@@ -18,13 +18,18 @@ def DayTimeChecker():
 
 def SoundChaser():
     if DayTimeChecker() == True:
-        rand_volume = randint(90, 100)
-        Sound.volume_set(rand_volume)
-        print(f'Volume set to {rand_volume}')
+        Sound.volume_max()
     else:
         Sound.volume_min()
-        print('Volume set to min')
+
+def LogWriter():
+    f = open(r"C:\Users\123\Desktop\GeekBrains\FunTask\SoundChaser\log.txt", "a+")
+    dt_as_string = (str(datetime.now())[5:16])
+    current_volume_as_string = str(Sound.current_volume())
+    f.write(f'{dt_as_string}, Current volume set to: {current_volume_as_string} \n')
+    f.close()
 
 while True:
     SoundChaser()
-    time.sleep(10)
+    LogWriter()
+    time.sleep(600)
