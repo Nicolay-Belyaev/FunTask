@@ -1,6 +1,7 @@
 from datetime import datetime
-from sound import *
+from sound import Sound
 import time
+
 
 
 def DayTimeChecker():
@@ -23,7 +24,7 @@ def SoundChaser():
         Sound.volume_min()
 
 def LogWriter():
-    f = open(r"C:\Users\123\Desktop\GeekBrains\FunTask\SoundChaser\log.txt", "a+") # хардкод. надо сделать так, что бы лог файл создавался к каталоге скрипта.
+    f = open("log.txt", "a+") # хардкод. надо сделать так, что бы лог файл создавался к каталоге скрипта.
     dt_as_string = (str(datetime.now())[5:16])
     current_volume_as_string = str(Sound.current_volume())
     f.write(f'{dt_as_string}, Current volume set to: {current_volume_as_string} \n')
